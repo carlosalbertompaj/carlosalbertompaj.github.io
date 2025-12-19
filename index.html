@@ -1,120 +1,183 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es-MX">
 <head>
-  <meta charset="utf-8">
-  <title>Política de Privacidad – Calculadora Penal (México)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root{--fg:#1b1b1b;--muted:#555;--link:#0b5ed7;--bg:#fff;--card:#fafafa;--border:#e6e6e6}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Arial,sans-serif;line-height:1.6;color:var(--fg);background:var(--bg);margin:0}
-    .wrap{max-width:920px;margin:0 auto;padding:24px}
-    h1{font-size:1.8rem;margin:0 0 12px} h2{font-size:1.2rem;margin:28px 0 10px}
-    p,li{font-size:1rem} a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
-    small{color:var(--muted)}
-    ul.columns{columns:2;column-gap:28px} @media (max-width:720px){ul.columns{columns:1}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Penal - Herramienta para Abogados en México</title>
+    <meta name="description" content="La app esencial para abogados penalistas. Calcula individualización de sanciones, procedimiento abreviado y prescripción penal con exactitud.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --primary: #0f172a; 
+            --secondary: #334155; 
+            --accent: #867522; 
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- COMPONENTES --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .btn:hover { background: var(--accent); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+
+        /* --- HEADER --- */
+        header { padding: 20px 0; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); z-index: 100; }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .logo span { color: var(--accent); }
+
+        /* --- HERO SECTION --- */
+        .hero { padding: 80px 0; background: linear-gradient(to bottom, #fff, #f1f5f9); }
+        .hero .container { display: flex; align-items: center; gap: 50px; }
+        .hero-content { flex: 1; }
+        .hero-content h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 20px; color: var(--primary); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; }
+        .hero-image { flex: 1; display: flex; justify-content: center; }
+        /* Mockup del teléfono (CSS puro para placeholder) */
+        .phone-mockup {
+            width: 280px; height: 560px; background: #000; border-radius: 40px; border: 8px solid #333;
+            position: relative; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .phone-screen { width: 100%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 0.9rem; text-align: center; padding: 20px; }
+
+        /* --- FEATURES --- */
+        .features { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.2rem; margin-bottom: 10px; color: var(--primary); }
+        .section-title p { color: var(--text-light); }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { padding: 30px; border-radius: 12px; background: var(--bg); border: 1px solid #e2e8f0; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .icon { font-size: 2rem; margin-bottom: 20px; display: block; }
+        .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* --- PRICING MODEL --- */
+        .pricing-info { background: var(--primary); color: white; padding: 60px 0; text-align: center; }
+        .pricing-info h2 { font-size: 2rem; margin-bottom: 20px; }
+        .pricing-info p { max-width: 600px; margin: 0 auto 30px; opacity: 0.9; }
+
+        /* --- FOOTER --- */
+        footer { padding: 40px 0; background: var(--bg-alt); color: var(--text-light); font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
+        footer .container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a:hover { color: var(--primary); text-decoration: underline; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero .container { flex-direction: column; text-align: center; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-image { margin-top: 40px; }
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Política de Privacidad</h1>
-  <p><strong>Última actualización:</strong> 9 de septiembre de 2025</p>
 
-  <div class="card">
-    <p><strong>Nombre de la aplicación:</strong> Calculadora Penal<br>
-       <strong>Desarrollador:</strong> Dr. Carlos Alberto Martínez Beltrán<br>
-       <strong>Correo de contacto:</strong> <a href="mailto:carlosalbertompaj@gmail.com">carlosalbertompaj@gmail.com</a></p>
-    <p><strong>Renuncia de responsabilidad: </strong> Esta aplicación no representa ni está afiliada a ninguna autoridad del Gobierno de los Estados Unidos Mexicanos o cualquiera de sus entidades federativas, estatales o paraestatales. Es una herramienta informativa que calcula penas y multas con base en la alimentación que el usuario realice según las sanciones que establece el Código Penal Federal o códigos penales de cualquier entidad federativa. La información usada es pública y proviene de fuentes oficiales.</p>
-  </div>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Calculadora<span>Penal</span></a>
+            <a href="#" class="btn">Descargar App</a>
+        </div>
+    </header>
 
-  <h2>1. Información general</h2>
-  <p>Esta Política de Privacidad regula el uso de “Calculadora Penal”. La app está diseñada con fines informativos y educativos, y realiza cálculos a partir de datos que ingresa la persona usuaria. La aplicación <strong>no requiere permisos sensibles</strong>, <strong>no recopila información personal</strong>, <strong>no almacena datos del usuario en servidores del desarrollador</strong> y <strong>no accede</strong> a cámara, micrófono, contactos, ubicación u otras funcionalidades sensibles.</p>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Precisión Jurídica en tu Bolsillo</h1>
+                <p>La herramienta esencial para el abogado penalista en México. Realiza cálculos complejos de sanciones, prescripción y procedimiento abreviado en segundos.</p>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: inherit;">
+                    <a href="#" style="background: black; color: white; padding: 10px 20px; border-radius: 6px; display: flex; align-items: center; gap: 10px;">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.36,11.09L18.34,9.91L15.39,12.85L18.34,15.79L20.36,14.61C20.93,14.29 21.28,13.68 21.28,13.04V12.66C21.28,12 20.93,11.41 20.36,11.09M6.05,2.66L16.81,8.88L14.54,11.14L3.84,2.15H6.05Z" /></svg>
+                        <div>
+                            <span style="display:block; font-size: 10px; text-transform: uppercase;">Disponible en</span>
+                            <span style="font-weight: bold; font-size: 16px;">Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="logo_light.png" alt="Captura de la App">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <h2>2. No recopilación de datos personales</h2>
-  <p>El desarrollador <strong>no solicita, registra, transmite ni almacena</strong> datos personales identificables. En particular, no recabamos:</p>
-  <ul>
-    <li>Nombres y apellidos.</li>
-    <li>Números de teléfono.</li>
-    <li>Correos electrónicos.</li>
-    <li>Ubicación geográfica o dirección IP.</li>
-    <li>Fotografías, archivos o contenido del dispositivo.</li>
-    <li>Métricas de uso o actividad del usuario.</li>
-  </ul>
-  <p>Todos los cálculos se realizan <strong>localmente en el dispositivo</strong> y no se transmiten a servidores externos.</p>
+    <section class="features" id="modulos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Módulos Especializados</h2>
+                <p>Suscríbete únicamente a las herramientas que necesitas para tu práctica diaria.</p>
+            </div>
 
-  <h2>3. Permisos del dispositivo y almacenamiento local</h2>
-  <p>La app puede usar recursos básicos del sistema, por ejemplo, <strong>almacenamiento local</strong> para preferencias de interfaz (modo claro/oscuro, color del tema) y el estatus de aceptación del aviso legal. Estos datos permanecen en el dispositivo y pueden eliminarse desinstalando la app o borrando sus datos.</p>
+            <div class="grid-3">
+                <div class="card">
+                    <span class="icon">⚖️</span>
+                    <h3>Sanciones Penales</h3>
+                    <p>Individualización de la pena, conversión de días multa (UMA/Salario) y determinación de máximos y mínimos con exactitud.</p>
+                </div>
 
-  <h2>4. Servicios de terceros</h2>
-  <p>La app <strong>no integra</strong> servicios de terceros para publicidad, analítica, crash reporting o perfiles de usuario.</p>
+                <div class="card">
+                    <span class="icon">📉</span>
+                    <h3>Procedimiento Abreviado</h3>
+                    <p>Calcula reducciones de sentencia, beneficios pre-liberacionales y proyecta la pena final para negociaciones efectivas.</p>
+                </div>
 
-  <h2>5. Finalidad informativa y límites de uso</h2>
-  <p>La app entrega resultados estimados según criterios doctrinarios y legales del ámbito penal mexicano (por ejemplo, reglas de cómputo de pena, atenuantes/agravantes). <strong>No sustituye</strong> análisis jurídico, criterio profesional ni resoluciones judiciales. El desarrollador <strong>no se hace responsable</strong> por usos indebidos, decisiones administrativas o judiciales, ni por perjuicios derivados del uso de la app.</p>
+                <div class="card">
+                    <span class="icon">⏳</span>
+                    <h3>Prescripción Penal</h3>
+                    <p>Determina la media aritmética y las fechas exactas para la extinción de la acción penal basado en el código vigente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <h2>6. Exactitud, vigencia y exclusión de garantías</h2>
-  <p>Las normas pueden cambiar y existir criterios jurisprudenciales diversos. La app se proporciona “tal cual”, <strong>sin garantías</strong> explícitas o implícitas de exactitud, actualidad o adecuación a un fin particular. La persona usuaria debe verificar siempre la normativa vigente.</p>
+    <div class="pricing-info">
+        <div class="container">
+            <h2>Herramienta Profesional de Suscripción</h2>
+            <p>Descarga la aplicación gratuitamente. El uso continuo de los módulos requiere una suscripción mensual activa gestionada de forma segura por Google Play.</p>
+            <a href="#" class="btn" style="background: white; color: var(--primary);">Empezar Prueba</a>
+        </div>
+    </div>
 
-  <h2>7. No afiliación gubernamental</h2>
-  <p>La app <strong>no pertenece ni está afiliada</strong> a dependencias del Gobierno de los Estados Unidos Mexicanos ni a ninguna otra entidad federativa, estatal o paraestatal. Está desarrollada de manera independiente.</p>
+    <footer>
+        <div class="container">
+            <p class="logo" style="font-size: 1.2rem;">Calculadora<span>Penal</span></p>
+            <div class="footer-links">
+                <a href="PoliticaPrivacidad.html">Política de Privacidad</a>
+                <a href="TerminosyCondiciones.html">Términos y Condiciones</a>
+                <a href="mailto:carlosalbertompaj@gmail.com">Soporte</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem;">© 2025 Dr. Carlos Alberto Martínez Beltrán. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-  <h2>8. Cambios a esta Política</h2>
-  <p>Podremos actualizar esta Política por cambios legales o funcionales. La fecha de “Última actualización” indicará la versión vigente. El uso continuo de la app implica la aceptación de la Política modificada.</p>
-
-  <h2>9. Contacto</h2>
-  <p>Para dudas, sugerencias o solicitudes relacionadas con esta Política, escriba a <a href="mailto:carlosalbertompaj@gmail.com">carlosalbertompaj@gmail.com</a>.</p>
-
-  <hr>
-
-  <h2>Fuentes públicas oficiales de referencia</h2>
-
-  <h3>Federales</h3>
-  <ul>
-    <li><strong>Código Penal Federal</strong> (arts. 51 a 66 y el atinente a la pena por delito): <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf">diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf</a></li>
-    <li><strong>Ley General de Salud</strong> (arts. 473 a 477): <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf">diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf</a></li>
-    <li><strong>Ley General para Prevenir, Sancionar y Erradicar los Delitos en Materia de Trata de Personas</strong>: <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPSEDMTP.pdf">diputados.gob.mx/LeyesBiblio/pdf/LGPSEDMTP.pdf</a></li>
-    <li><strong>Ley General para Prevenir y Erradicar los Delitos en Materia de Secuestro</strong>: <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPSDMS_200521.pdf">diputados.gob.mx/LeyesBiblio/pdf/LGPSDMS_200521.pdf</a></li>
-    <li><strong>Ley Federal de Armas de Fuego y Explosivos</strong>: <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFAFE.pdf">diputados.gob.mx/LeyesBiblio/pdf/LFAFE.pdf</a></li>
-    <li><strong>CNPP</strong> (criterios de grado de punibilidad, art. 410): <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf">diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf</a></li>
-    <li><strong>SCJN – Jurisprudencia aplicable</strong> (Método para grado de punibilidad): <a href="https://sjf2.scjn.gob.mx/detalle/tesis/176280">sjf2.scjn.gob.mx/detalle/tesis/176280</a></li>
-  </ul>
-
-  <h3>Estatales (Códigos Penales)</h3>
-  <ul class="columns">
-    <li>Aguascalientes: <a href="https://congresoags.gob.mx/agenda_legislativa/leyes/descargarPdf/394">congresoags.gob.mx/.../394</a></li>
-    <li>Baja California: <a href="https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_V/20250902_CODPENAL.PDF">congresobc.gob.mx/.../20250902_CODPENAL.PDF</a></li>
-    <li>Baja California Sur: <a href="https://www.cbcs.gob.mx/index.php/trabajos-legislativos/leyes?layout=edit&id=1488">cbcs.gob.mx/.../id=1488</a></li>
-    <li>Campeche: <a href="https://legislacion.congresocam.gob.mx/index.php/lee/6-codigo-penal-del-estado-de-campeche">legislacion.congresocam.gob.mx/.../codigo-penal</a></li>
-    <li>Chiapas: <a href="https://www.congresochiapas.gob.mx/new/Info-Parlamentaria/LEY_0012.pdf?v=Mzc=">congresochiapas.gob.mx/.../LEY_0012.pdf</a></li>
-    <li>Chihuahua: <a href="https://www.congresochihuahua2.gob.mx/biblioteca/codigos/archivosCodigos/64.pdf">congresochihuahua2.gob.mx/.../64.pdf</a></li>
-    <li>Ciudad de México (antes D.F.): <a href="https://www.congresocdmx.gob.mx/media/documentos/1756a3b9d0689d278e4578e9bcb6c7591cc9b983.pdf">congresocdmx.gob.mx/.../.pdf</a></li>
-    <li>Coahuila: <a href="https://www.congresocoahuila.gob.mx/transparencia/03/Leyes_Coahuila/coa08_Nuevo_Codigo.pdf">congresocoahuila.gob.mx/.../Nuevo_Codigo.pdf</a></li>
-    <li>Colima: <a href="https://congresocol.gob.mx/web/Sistema/uploads/LegislacionEstatal/Codigos/codigo_penal_11jun2016.pdf">congresocol.gob.mx/.../codigo_penal_11jun2016.pdf</a></li>
-    <li>Durango: <a href="https://congresodurango.gob.mx/Archivos/legislacion/CODIGO%20PENAL%20(ANTERIOR).pdf">congresodurango.gob.mx/.../(ANTERIOR).pdf</a></li>
-    <li>Guanajuato (Código): <a href="https://www.congresogto.gob.mx/codigos/codigo-penal-del-estado-de-guanajuato">congresogto.gob.mx/.../codigo-penal</a></li>
-    <li>Guanajuato (Reformas): <a href="https://congreso-gto.s3.amazonaws.com/uploads/reforma/pdf/3633/CPEG_REF_26Junio2025.pdf">congreso-gto.s3.amazonaws.com/.../CPEG_REF_26Junio2025.pdf</a></li>
-    <li>Guerrero: <a href="https://congresogro.gob.mx/legislacion/codigos/ARCHI/codigo-penal-no-499.pdf">congresogro.gob.mx/.../codigo-penal-no-499.pdf</a></li>
-    <li>Hidalgo: <a href="https://www.congreso-hidalgo.gob.mx/biblioteca_legislativa/leyes_cintillo/Codigo%20Penal%20para%20el%20Estado%20de%20Hidalgo.pdf">congreso-hidalgo.gob.mx/.../Codigo Penal...</a></li>
-    <li>Jalisco: <a href="https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/legislacion/C%C3%B3digos/Documentos_PDF-C%C3%B3digos/C%C3%B3digo%20Penal%20para%20el%20Estado%20Libre%20y%20Soberano%20de%20Jalisco%20-281024.pdf">congresojal.gob.mx/.../281024.pdf</a></li>
-    <li>Michoacán: <a href="https://legislacion.scjn.gob.mx/Buscador/Paginas/wfArticuladoFast.aspx?q=pwUhdNvCSySjs8D73SRJELjhhaUZcNUAhmG3uMOZXEjPbvCW+hCG3V2MXXxNA96zCoNEIf8pFp47aImI2rDpaw==">legislacion.scjn.gob.mx/...Michoacán</a></li>
-    <li>Morelos: <a href="https://legislacion.scjn.gob.mx/Buscador/Paginas/wfArticuladoFast.aspx?q=sGiNPMW3FcBkLTcl6r0z02WoNGsQRUMNQh2Ix0EMw9UDhwm9oDyf/+BzSfR+3B2g4sp2AXiwHy9IydSBtNjyyw==">legislacion.scjn.gob.mx/...Morelos</a></li>
-    <li>Nayarit: <a href="https://contraloria.nayarit.gob.mx/assets/pdf/normateca/codigo_penal_estado_nayarit.pdf">contraloria.nayarit.gob.mx/.../codigo_penal...</a></li>
-    <li>Nuevo León: <a href="https://www.hcnl.gob.mx/trabajo_legislativo/leyes/pdf/CODIGO%20PENAL%20PARA%20EL%20ESTADO%20DE%20%20NUEVO%20LEON.pdf?2025-05-19">hcnl.gob.mx/.../CODIGO PENAL....pdf</a></li>
-    <li>Oaxaca: <a href="https://www.congresooaxaca.gob.mx/docs66.congresooaxaca.gob.mx/legislacion_estatal/Codigo_Penal_para_el_Edo_de_Oax_(_Ref_dto_2428_aprob_LXV_Legis_25_sep_2024_PO_41_14a_secc_12_oct_2024).pdf">congresooaxaca.gob.mx/.../Codigo_Penal_...pdf</a></li>
-    <li>Puebla: <a href="https://ojp.puebla.gob.mx/legislacion-del-estado/item/375-codigo-penal-del-estado-libre-y-soberano-de-puebla">ojp.puebla.gob.mx/.../375-codigo-penal...</a></li>
-    <li>Querétaro: <a href="https://site.legislaturaqueretaro.gob.mx/CloudPLQ/InvEst/Codigos/COD-ID-07.pdf">legislaturaqueretaro.gob.mx/.../COD-ID-07.pdf</a></li>
-    <li>Quintana Roo: <a href="https://documentos.congresoqroo.gob.mx/codigos/C6-XVIII-01042025-20250610T162947-C1820250401116-Codigo-penal-mod.pdf">congresoqroo.gob.mx/.../Codigo-penal-mod.pdf</a></li>
-    <li>San Luis Potosí: <a href="http://congresosanluis.gob.mx/sites/default/files/unpload/legislacion/codigos/2025/08/Codigo_Penal_Estado%20(al%2017%20julio%202025)..pdf">congresosanluis.gob.mx/.../julio_2025.pdf</a></li>
-    <li>Sinaloa: <a href="https://gaceta.congresosinaloa.gob.mx:3001/pdfs/leyes/Ley_7.pdf">congresosinaloa.gob.mx:3001/.../Ley_7.pdf</a></li>
-    <li>Sonora: <a href="https://gestion.api.congresoson.gob.mx/assets/archivos/2025/04/DLJ8QEHwuZXK5lp66SzmmA41lkH3vQpo.pdf">congresoson.gob.mx/.../2025/04/...pdf</a></li>
-    <li>Tabasco: <a href="https://tsj-tabasco.gob.mx/resources/pdf/biblioteca/codigo_penal.pdf">tsj-tabasco.gob.mx/.../codigo_penal.pdf</a></li>
-    <li>Tamaulipas: <a href="https://www.congresotamaulipas.gob.mx/legislacionestatal/legislacionvigente/VerCodigo.asp?IdCodigo=102">congresotamaulipas.gob.mx/.../VerCodigo.asp</a></li>
-    <li>Tlaxcala: <a href="https://tsjtlaxcala.gob.mx/transparencia/Fracciones_a63/I/codigos/codigopenaltlaxcala.pdf">tsjtlaxcala.gob.mx/.../codigopenaltlaxcala.pdf</a></li>
-    <li>Veracruz: <a href="https://www.legisver.gob.mx/leyes/LeyesPDF/CODIGOPENAL07032025.pdf">legisver.gob.mx/.../CODIGOPENAL07032025.pdf</a></li>
-    <li>Yucatán: <a href="https://www.congresoyucatan.gob.mx/legislacion/codigos">congresoyucatan.gob.mx/legislacion/codigos</a></li>
-    <li>Zacatecas: <a href="https://www.congresozac.gob.mx/65/ley&cual=103&tipo=pdf">congresozac.gob.mx/.../cual=103</a></li>
-  </ul>
-
-  <p><small>Importante: Algunos portales cambian rutas y nombres de archivo. Verifique siempre la <strong>vigencia</strong> y la <strong>última publicación oficial</strong>. En caso de discrepancia, consulte el Diario Oficial de la Federación o el portal legislativo correspondiente.</small></p>
-</div>
 </body>
 </html>
